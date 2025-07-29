@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key); // added key
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,15 +14,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
-      home: TicTacToe(),
+      home: const TicTacToe(), // added const
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class TicTacToe extends StatefulWidget {
+  const TicTacToe({Key? key}) : super(key: key); // added key
+
   @override
-  _TicTacToeState createState() => _TicTacToeState();
+  State<TicTacToe> createState() => _TicTacToeState();
 }
 
 class _TicTacToeState extends State<TicTacToe> {
@@ -84,13 +88,13 @@ class _TicTacToeState extends State<TicTacToe> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           winner == 'Draw' ? 'Game Over' : 'Congratulations!',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         ),
         content: Text(
           winner == 'Draw'
               ? 'It\'s a draw!'
               : 'Player $winner has won the game!',
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         actions: [
           TextButton(
@@ -98,7 +102,7 @@ class _TicTacToeState extends State<TicTacToe> {
               Navigator.of(context).pop();
               _resetGame();
             },
-            child: Text(
+            child: const Text(
               'Play Again',
               style: TextStyle(color: Colors.deepPurple, fontSize: 18),
             ),
@@ -128,7 +132,7 @@ class _TicTacToeState extends State<TicTacToe> {
               ? 'Switched to Light Theme'
               : 'Switched to Dark Theme',
         ),
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
@@ -140,25 +144,25 @@ class _TicTacToeState extends State<TicTacToe> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Tic-Tac-Toe'),
+          title: const Text('Tic-Tac-Toe'),
           centerTitle: true,
           actions: [
             IconButton(
-              icon: Icon(Icons.color_lens),
+              icon: const Icon(Icons.color_lens),
               onPressed: _toggleTheme,
             ),
           ],
         ),
         body: AnimatedContainer(
-          duration: Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 500),
           decoration: BoxDecoration(
             gradient: currentTheme == ThemeMode.light
-                ? LinearGradient(
+                ? const LinearGradient(
                     colors: [Colors.deepPurple, Colors.purpleAccent],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   )
-                : LinearGradient(
+                : const LinearGradient(
                     colors: [Colors.black87, Colors.grey],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -168,12 +172,12 @@ class _TicTacToeState extends State<TicTacToe> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 20),
-                Container(
+                const SizedBox(height: 20),
+                SizedBox(
                   width: gridSize,
                   height: gridSize,
                   child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       mainAxisSpacing: 8.0,
                       crossAxisSpacing: 8.0,
@@ -183,7 +187,7 @@ class _TicTacToeState extends State<TicTacToe> {
                       return GestureDetector(
                         onTap: () => _handleTap(index),
                         child: AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           decoration: BoxDecoration(
                             color: board[index] == ''
                                 ? (currentTheme == ThemeMode.light
@@ -193,7 +197,7 @@ class _TicTacToeState extends State<TicTacToe> {
                                     ? Colors.blueAccent
                                     : Colors.redAccent,
                             borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black38,
                                 blurRadius: 4,
@@ -216,16 +220,16 @@ class _TicTacToeState extends State<TicTacToe> {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'Player Turn: $currentPlayer',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Card(
                   color: Colors.white.withOpacity(0.9),
                   shape: RoundedRectangleBorder(
@@ -235,7 +239,7 @@ class _TicTacToeState extends State<TicTacToe> {
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Scoreboard',
                           style: TextStyle(
                             fontSize: 20,
@@ -243,10 +247,10 @@ class _TicTacToeState extends State<TicTacToe> {
                             color: Colors.deepPurple,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           'Player X: $scoreX | Player O: $scoreO',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black87,
                           ),
@@ -255,8 +259,8 @@ class _TicTacToeState extends State<TicTacToe> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'Developed by Phanindra',
                   style: TextStyle(
                     fontSize: 18,
