@@ -149,7 +149,7 @@ const ContactSection = () => {
                     className="bg-gradient-primary hover:shadow-glow transition-all duration-300 flex items-center gap-2"
                   >
                     <a 
-                      href="/assets/PhanindraResume.pdf" 
+                      href="/assets/PhanindraResume1.pdf" 
                       download 
                       target="_blank" 
                       rel="noopener noreferrer"
