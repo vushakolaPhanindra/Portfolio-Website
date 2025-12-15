@@ -8,9 +8,8 @@ import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    user_name: '',
-    user_email: '',
-    title: '',
+    name: '',
+    email: '',
     message: ''
   });
 
@@ -35,21 +34,17 @@ const ContactSection = () => {
         serviceId,
         templateId,
         {
-          user_name: formData.user_name,
-          user_email: formData.user_email,
-          title: formData.title,
-          message: formData.message
+          user_name: formData.name,
+          user_email: formData.email,
+          title: 'Portfolio Contact Message',
+          user_message: formData.message,
+          time: new Date().toLocaleString()
         },
         publicKey
       );
 
       alert('✅ Message sent successfully!');
-      setFormData({
-        user_name: '',
-        user_email: '',
-        title: '',
-        message: ''
-      });
+      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.error('Email sending failed:', error);
       alert('❌ Failed to send message. Please try again later.');
@@ -88,51 +83,65 @@ const ContactSection = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-portfolio-text-primary">
-            Contact <span className="text-portfolio-accent">Me</span>
+            Get In <span className="text-portfolio-accent">Touch</span>
           </h2>
           <p className="text-xl text-portfolio-text-muted max-w-2xl mx-auto">
-            Feel free to reach out for collaborations, internships, or opportunities.
+            Ready to collaborate on exciting AI/ML projects? Let's discuss how we can work together to build innovative solutions.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
+          {/* Contact Information */}
           <div className="space-y-8">
+            <div>
+              <h3 className="text-2xl font-semibold text-portfolio-text-primary mb-6">
+                Let's Connect
+              </h3>
+              <p className="text-portfolio-text-secondary leading-relaxed mb-8">
+                I'm always excited to discuss new opportunities, innovative projects, or just chat about the latest in AI and machine learning.
+                Whether you have a project in mind or want to explore potential collaborations, I'd love to hear from you.
+              </p>
+            </div>
+
             <div className="grid sm:grid-cols-2 gap-4">
               {contactInfo.map((info, index) => (
                 <Card
                   key={index}
-                  className="bg-gradient-card border-portfolio-accent/20 shadow-card hover:shadow-elevated transition-all duration-300 transform hover:scale-105"
+                  className="bg-gradient-card border-portfolio-accent/20 shadow-card hover:shadow-elevated transition-all duration-300 transform hover:scale-105 group"
                 >
-                  <CardContent className="p-6 flex items-center gap-4">
-                    {info.icon}
-                    <div>
-                      <h4 className="font-semibold text-portfolio-text-primary text-sm">
-                        {info.label}
-                      </h4>
-                      <a
-                        href={info.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-portfolio-text-secondary hover:text-portfolio-accent text-sm"
-                      >
-                        {info.value}
-                      </a>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4">
+                      <div className="p-2 bg-portfolio-accent/10 rounded-lg">
+                        {info.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-portfolio-text-primary text-sm">
+                          {info.label}
+                        </h4>
+                        <a
+                          href={info.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-portfolio-text-secondary hover:text-portfolio-accent text-sm"
+                        >
+                          {info.value}
+                        </a>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
-            {/* Resume */}
+            {/* Resume Download */}
             <Card className="bg-gradient-card border-portfolio-accent/20 shadow-card">
               <CardContent className="p-6 flex items-center justify-between">
                 <div>
-                  <h4 className="font-semibold text-portfolio-text-primary">
+                  <h4 className="font-semibold text-portfolio-text-primary mb-2">
                     Resume / CV
                   </h4>
                   <p className="text-portfolio-text-secondary text-sm">
-                    Download my resume for more details.
+                    Download my complete resume to learn more about my experience and qualifications.
                   </p>
                 </div>
                 <Button asChild className="bg-gradient-primary flex gap-2">
@@ -151,56 +160,47 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <Card className="bg-gradient-card border-portfolio-accent/20 shadow-card">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-semibold text-portfolio-text-primary mb-6">
-                Send a Message
-              </h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <Input
-                  name="user_name"
-                  placeholder="Your Name"
-                  value={formData.user_name}
-                  onChange={handleInputChange}
-                  required
-                />
-
-                <Input
-                  name="user_email"
-                  type="email"
-                  placeholder="Your Email"
-                  value={formData.user_email}
-                  onChange={handleInputChange}
-                  required
-                />
-
-                <Input
-                  name="title"
-                  placeholder="Subject"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  required
-                />
-
-                <Textarea
-                  name="message"
-                  placeholder="Your Message"
-                  rows={6}
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                />
-
-                <Button
-                  type="submit"
-                  className="w-full bg-gradient-primary flex items-center justify-center gap-2"
-                >
-                  <Send size={16} />
-                  Send Message
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+          <div>
+            <Card className="bg-gradient-card border-portfolio-accent/20 shadow-card">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-semibold text-portfolio-text-primary mb-6">
+                  Send a Message
+                </h3>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <Input
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Textarea
+                    name="message"
+                    placeholder="Your Message"
+                    rows={6}
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-primary flex items-center justify-center gap-2"
+                  >
+                    <Send size={16} />
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </section>
