@@ -13,36 +13,6 @@ It features a clean, modern design with smooth animations, a dedicated section f
 You can view the website here:  
 https://portfolio-website-khaki-delta.vercel.app/
 
-## Technologies used
-
-- React.js
-- Tailwind CSS
-- Framer Motion
-- EmailJS for handling the contact form
-
-## Getting started
-
-To run the project locally:
-
-1. Clone the repository
-
-   ```bash
-   git clone https://github.com/phanindraVushakola/Portfolio-Website.git
-   cd portfolio-website
-Install dependencies
-
-bash
-Copy
-Edit
-npm install
-Start the development server
-
-bash
-Copy
-Edit
-npm start
-The website will open in your browser at http://localhost:3000.
-
 Contact
 If you'd like to connect, discuss a project, or share feedback, feel free to reach out:
 
